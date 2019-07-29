@@ -1,0 +1,15 @@
+set -e # exit immediately if a simple command exits with a non-zero status
+set -u # report the usage of uninitialized variables
+
+# Available variables
+# $BOSH_COMPILE_TARGET - where this package & spec'd source files are available
+# $BOSH_INSTALL_TARGET - where you copy/install files to be included in package
+
+mkdir -p $BOSH_INSTALL_TARGET
+
+for DEB in $(ls -1 *.deb); do
+  echo "Installing $(basename $DEB)"
+  cp $DEB $BOSH_INSTALL_TARGET
+done
+
+# cp -a crowdstrike-agent/profile.sh $BOSH_INSTALL_TARGET/

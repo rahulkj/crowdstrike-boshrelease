@@ -1,0 +1,5 @@
+check process crowdstrike-agent
+  with pidfile /var/vcap/sys/run/crowdstrike-agent/pid
+  start program "/var/vcap/jobs/crowdstrike-agent/bin/ctl start" with timeout 240 seconds
+  stop program "/var/vcap/jobs/crowdstrike-agent/bin/ctl stop"
+  group vcap

@@ -1,0 +1,12 @@
+---
+name: crowdstrike-agent
+
+templates:
+  bin/ctl.erb: bin/ctl
+
+packages:
+  - crowdstrike-agent
+
+properties:
+  customer_id:
+    description: This is the customer id required to connect the agent to the SaaS solution
