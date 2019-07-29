@@ -1,0 +1,13 @@
+releases:
+- name: crowdstrike-boshrelease
+  version: 1
+addons:
+- name: crowdstrike-agent-xenial
+  jobs:
+  - name: crowdstrike-agent
+    release: crowdstrike-boshrelease
+    properties:
+      customer_id:        ### Enter your customer ID
+  include:
+    stemcell:
+    - os: ubuntu-xenial
