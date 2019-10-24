@@ -6,6 +6,7 @@ set -u # report the usage of uninitialized variables
 RUN_DIR=/var/vcap/sys/run/crowdstrike-agent
 LOG_DIR=/var/vcap/sys/log/crowdstrike-agent
 PIDFILE=${RUN_DIR}/pid
+CUSTOMER_ID="<%= p("customer_id") %>"
 
 case $1 in
 
@@ -17,16 +18,16 @@ case $1 in
     # link the agent on start if needed
     # . ${JOB_DIR}/bin/link-agent.sh
 
-    /opt/CrowdStrike/falconctl -s -f --cid=p("customer_id")
+    /opt/CrowdStrike/falconctl -s -f --cid=${CUSTOMER_ID}
 
     /opt/CrowdStrike/falcond
 
-    ps -ef | grep "falcond" | grep -v "grep" | tr -s ' ' | cut -d ' ' -f2 > $PIDFILE
+    ps -ef | grep "falcond" | grep -v "grep" | tr -s ' ' | cut -d ' ' -f2 > ${PIDFILE}
     ;;
 
   stop)
-    kill -9 `cat $PIDFILE`
-    rm -f $PIDFILE
+    kill -9 `cat ${PIDFILE}`
+    rm -f ${PIDFILE}
     ;;
   *)
     echo "Usage: crowdstrike-agent_ctl {start|stop}"
