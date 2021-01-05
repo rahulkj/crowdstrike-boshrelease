@@ -59,9 +59,14 @@ This populates the `blobs.yml` with blob filename, filename size, and SHA
   bosh upload-release crowdstrike-boshrelease.tgz
   ```
 
+* Generate runtime config
+  ```
+  bosh int runtime-config/crowdstrike.yml --var=release_version=1 --var=crowdstrike_customer_id=xxxxxxxxxx > generated_runtime_config.yml
+  ```
+
 * Update the runtime config
   ```
-  bosh update-runtime-config --name=crowdstrike runtime-config/crowdstrike.yml
+  bosh update-runtime-config --name=crowdstrike generated_runtime_config.yml
   ```
 
 * Trigger `Apply Changes` from Ops Manager
